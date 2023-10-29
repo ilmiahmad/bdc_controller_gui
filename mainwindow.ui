@@ -44,7 +44,7 @@
      <height>0</height>
     </size>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_18">
+   <layout class="QVBoxLayout" name="verticalLayout_12">
     <item>
      <widget class="QTabWidget" name="maintab">
       <property name="sizePolicy">
@@ -129,7 +129,7 @@
                            </widget>
                           </item>
                           <item>
-                           <widget class="QComboBox" name="comboBox">
+                           <widget class="portsComboBox" name="port_combobox">
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                               <horstretch>0</horstretch>
@@ -150,19 +150,32 @@
                            </widget>
                           </item>
                           <item>
-                           <widget class="QComboBox" name="comboBox_2">
+                           <widget class="QComboBox" name="baud_combobox">
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                               <horstretch>0</horstretch>
                               <verstretch>0</verstretch>
                              </sizepolicy>
                             </property>
+                            <property name="currentIndex">
+                             <number>1</number>
+                            </property>
+                            <item>
+                             <property name="text">
+                              <string>9600</string>
+                             </property>
+                            </item>
+                            <item>
+                             <property name="text">
+                              <string>115200</string>
+                             </property>
+                            </item>
                            </widget>
                           </item>
                          </layout>
                         </item>
                         <item>
-                         <widget class="QPushButton" name="pushButton_3">
+                         <widget class="QPushButton" name="connect_button">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                             <horstretch>0</horstretch>
@@ -209,21 +222,21 @@
                  <item>
                   <layout class="QVBoxLayout" name="verticalLayout_4">
                    <item>
-                    <widget class="QPushButton" name="pushButton_2">
+                    <widget class="QPushButton" name="apply_button">
                      <property name="text">
                       <string>Apply</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="pushButton_4">
+                    <widget class="QPushButton" name="restart_button">
                      <property name="text">
                       <string>Restart</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="pushButton">
+                    <widget class="QPushButton" name="save_button">
                      <property name="text">
                       <string> Save Configuration</string>
                      </property>
@@ -255,7 +268,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_6">
+                  <widget class="QComboBox" name="preset_combobox">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
                      <horstretch>0</horstretch>
@@ -288,7 +301,7 @@
                   <enum>QTabWidget::Rounded</enum>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="tab_6">
                   <attribute name="title">
@@ -308,7 +321,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QSpinBox" name="spinBox">
+                         <widget class="QSpinBox" name="devid_spinbox">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                             <horstretch>0</horstretch>
@@ -329,12 +342,9 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="lineEdit">
-                          <property name="sizePolicy">
-                           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                           </sizepolicy>
+                         <widget class="QDoubleSpinBox" name="gearbox_spinbox">
+                          <property name="maximum">
+                           <double>100000.000000000000000</double>
                           </property>
                          </widget>
                         </item>
@@ -350,12 +360,9 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="lineEdit_2">
-                          <property name="sizePolicy">
-                           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                           </sizepolicy>
+                         <widget class="QSpinBox" name="encodercpr_spinbox">
+                          <property name="maximum">
+                           <number>9999999</number>
                           </property>
                          </widget>
                         </item>
@@ -371,13 +378,32 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QComboBox" name="comboBox_4">
+                         <widget class="QComboBox" name="encoderdir_combobox">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                             <horstretch>0</horstretch>
                             <verstretch>0</verstretch>
                            </sizepolicy>
                           </property>
+                          <property name="currentText">
+                           <string>Reverse</string>
+                          </property>
+                          <property name="currentIndex">
+                           <number>0</number>
+                          </property>
+                          <property name="minimumContentsLength">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <property name="text">
+                            <string>Reverse</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>Forward</string>
+                           </property>
+                          </item>
                          </widget>
                         </item>
                        </layout>
@@ -392,13 +418,31 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QComboBox" name="comboBox_3">
+                         <widget class="QComboBox" name="freqmod_combobox">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                             <horstretch>0</horstretch>
                             <verstretch>0</verstretch>
                            </sizepolicy>
                           </property>
+                          <property name="currentIndex">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <property name="text">
+                            <string>1Khz</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>6khz</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>12khz</string>
+                           </property>
+                          </item>
                          </widget>
                         </item>
                        </layout>
@@ -426,7 +470,23 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QComboBox" name="comboBox_5"/>
+                         <widget class="QComboBox" name="controlMode_combobox">
+                          <item>
+                           <property name="text">
+                            <string>PWM</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>SPEED</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string>POSITION</string>
+                           </property>
+                          </item>
+                         </widget>
                         </item>
                        </layout>
                       </item>
@@ -440,7 +500,11 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+                         <widget class="QDoubleSpinBox" name="kppos_spinbox">
+                          <property name="maximum">
+                           <double>100000.000000000000000</double>
+                          </property>
+                         </widget>
                         </item>
                        </layout>
                       </item>
@@ -454,7 +518,11 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+                         <widget class="QDoubleSpinBox" name="speedkp_spinbox">
+                          <property name="maximum">
+                           <double>100000.000000000000000</double>
+                          </property>
+                         </widget>
                         </item>
                        </layout>
                       </item>
@@ -468,7 +536,11 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
+                         <widget class="QDoubleSpinBox" name="ki_spinbox">
+                          <property name="maximum">
+                           <double>100000.000000000000000</double>
+                          </property>
+                         </widget>
                         </item>
                        </layout>
                       </item>
@@ -482,7 +554,11 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QSpinBox" name="spinBox_3"/>
+                         <widget class="QSpinBox" name="maxspeed_spinbox">
+                          <property name="maximum">
+                           <number>9999999</number>
+                          </property>
+                         </widget>
                         </item>
                        </layout>
                       </item>
@@ -496,7 +572,11 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QSpinBox" name="spinBox_2"/>
+                         <widget class="QSpinBox" name="maxpwm_spinbox">
+                          <property name="maximum">
+                           <number>9999999</number>
+                          </property>
+                         </widget>
                         </item>
                        </layout>
                       </item>
@@ -538,143 +618,67 @@
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_19">
-                  <item>
-                   <widget class="QRadioButton" name="radioButton_3">
-                    <property name="text">
-                     <string>Speed</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QRadioButton" name="radioButton_2">
-                    <property name="text">
-                     <string>Position</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QRadioButton" name="radioButton">
-                    <property name="text">
-                     <string>Current</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
+                 <layout class="QHBoxLayout" name="horizontalLayout_19"/>
                 </widget>
                </item>
                <item>
-                <widget class="QCustomPlot" name="plot" native="true">
+                <widget class="QTabWidget" name="tabWidget">
                  <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="autoFillBackground">
-                  <bool>true</bool>
+                 <property name="tabShape">
+                  <enum>QTabWidget::Rounded</enum>
                  </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QWidget" name="tab_3">
-              <attribute name="title">
-               <string>Register Map</string>
-              </attribute>
-              <layout class="QVBoxLayout" name="verticalLayout_13">
-               <item>
-                <widget class="QTableWidget" name="tableWidget">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
+                 <property name="currentIndex">
+                  <number>0</number>
                  </property>
-                 <property name="frameShape">
-                  <enum>QFrame::NoFrame</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Sunken</enum>
-                 </property>
-                 <property name="lineWidth">
-                  <number>1</number>
-                 </property>
-                 <property name="autoScrollMargin">
-                  <number>16</number>
-                 </property>
-                 <property name="tabKeyNavigation">
-                  <bool>true</bool>
-                 </property>
-                 <property name="showGrid">
-                  <bool>true</bool>
-                 </property>
-                 <property name="gridStyle">
-                  <enum>Qt::SolidLine</enum>
-                 </property>
-                 <property name="sortingEnabled">
-                  <bool>false</bool>
-                 </property>
-                 <property name="wordWrap">
-                  <bool>true</bool>
-                 </property>
-                 <property name="cornerButtonEnabled">
-                  <bool>true</bool>
-                 </property>
-                 <property name="rowCount">
-                  <number>12</number>
-                 </property>
-                 <property name="columnCount">
-                  <number>3</number>
-                 </property>
-                 <attribute name="horizontalHeaderVisible">
-                  <bool>true</bool>
-                 </attribute>
-                 <attribute name="horizontalHeaderCascadingSectionResizes">
-                  <bool>true</bool>
-                 </attribute>
-                 <attribute name="horizontalHeaderMinimumSectionSize">
-                  <number>38</number>
-                 </attribute>
-                 <attribute name="horizontalHeaderDefaultSectionSize">
-                  <number>100</number>
-                 </attribute>
-                 <attribute name="horizontalHeaderHighlightSections">
-                  <bool>true</bool>
-                 </attribute>
-                 <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-                  <bool>false</bool>
-                 </attribute>
-                 <attribute name="verticalHeaderVisible">
-                  <bool>false</bool>
-                 </attribute>
-                 <attribute name="verticalHeaderCascadingSectionResizes">
-                  <bool>false</bool>
-                 </attribute>
-                 <attribute name="verticalHeaderDefaultSectionSize">
-                  <number>30</number>
-                 </attribute>
-                 <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-                  <bool>false</bool>
-                 </attribute>
-                 <attribute name="verticalHeaderStretchLastSection">
-                  <bool>false</bool>
-                 </attribute>
-                 <row/>
-                 <row/>
-                 <row/>
-                 <row/>
-                 <row/>
-                 <row/>
-                 <row/>
-                 <row/>
-                 <row/>
-                 <row/>
-                 <row/>
-                 <row/>
-                 <column/>
-                 <column/>
-                 <column/>
+                 <widget class="QWidget" name="tab_10">
+                  <attribute name="title">
+                   <string>Speed</string>
+                  </attribute>
+                  <layout class="QVBoxLayout" name="verticalLayout_15">
+                   <item>
+                    <widget class="QCustomPlot" name="speedplot" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="tab_11">
+                  <attribute name="title">
+                   <string>Position</string>
+                  </attribute>
+                  <layout class="QVBoxLayout" name="verticalLayout_14">
+                   <item>
+                    <widget class="QCustomPlot" name="positionplot" native="true"/>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="tab_12">
+                  <attribute name="title">
+                   <string>Current</string>
+                  </attribute>
+                  <layout class="QVBoxLayout" name="verticalLayout_10">
+                   <item>
+                    <widget class="QCustomPlot" name="currentplot" native="true">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
                 </widget>
                </item>
               </layout>
@@ -684,7 +688,7 @@
            <item>
             <widget class="QTabWidget" name="panel">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -693,6 +697,9 @@
               <number>0</number>
              </property>
              <widget class="QWidget" name="tab_2">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
               <attribute name="title">
                <string>Panel</string>
               </attribute>
@@ -701,29 +708,86 @@
                 <layout class="QVBoxLayout" name="verticalLayout">
                  <item>
                   <widget class="QLabel" name="label_4">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="text">
                     <string>Target Value</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_3"/>
+                  <widget class="QDoubleSpinBox" name="applytarget_spinbox">
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="buttonSymbols">
+                    <enum>QAbstractSpinBox::UpDownArrows</enum>
+                   </property>
+                   <property name="minimum">
+                    <double>-9999.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>9999.000000000000000</double>
+                   </property>
+                  </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_6">
+                  <widget class="QPushButton" name="applytarget_button">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="text">
                     <string>Apply Target</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_5">
+                  <widget class="QPushButton" name="calibration_button">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="text">
                     <string>Encoder Calibration</string>
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QLabel" name="label_10">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>Log</string>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
+               </item>
+               <item>
+                <widget class="QPlainTextEdit" name="consolelog">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Maximum" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
                </item>
                <item>
                 <spacer name="verticalSpacer">
@@ -760,17 +824,11 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuMenu">
-    <property name="title">
-     <string>Menu</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
      <string>About</string>
     </property>
    </widget>
-   <addaction name="menuMenu"/>
    <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -781,6 +839,11 @@
    <extends>QWidget</extends>
    <header>qcustomplot.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>portsComboBox</class>
+   <extends>QComboBox</extends>
+   <header>portscombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

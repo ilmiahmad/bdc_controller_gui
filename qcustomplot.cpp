@@ -11772,10 +11772,16 @@ void QCPAbstractPlottable::rescaleValueAxis(bool onlyEnlarge, bool inKeyRange) c
   
   bool foundRange;
   QCPRange newRange = getValueRange(foundRange, signDomain, inKeyRange ? keyAxis->range() : QCPRange());
+
   if (foundRange)
   {
+
+    newRange.upper = newRange.upper + abs(newRange.upper*0.5);
+    newRange.lower = newRange.lower - abs(newRange.lower*0.5);
+
     if (onlyEnlarge)
-      newRange.expand(valueAxis->range());
+    newRange.expand(valueAxis->range());
+
     if (!QCPRange::validRange(newRange)) // likely due to range being zero (plottable has only constant data in this axis dimension), shift current range to at least center the plottable
     {
       double center = (newRange.lower+newRange.upper)*0.5; // upper and lower should be equal anyway, but just to make sure, incase validRange returned false for other reason
