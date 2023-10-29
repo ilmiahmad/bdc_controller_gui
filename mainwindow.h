@@ -105,6 +105,7 @@ signals:
     void dataPlotChanged();
     void dataParamChanged();
     void dataReady(QByteArray data_in);
+    void calibrationDone();
 
 private slots:
 
@@ -121,6 +122,7 @@ private slots:
     void on_calibration_button_clicked();
     void on_save_button_clicked();
     void on_apply_button_clicked();
+    void calibrationProcessData();
 
 private:
 
@@ -138,10 +140,13 @@ private:
     Motor *motor = nullptr;
     QSerialPort *serial = nullptr;
     QTimer *stimer = nullptr;
+    QTimer *calibTimer = nullptr;
 
     const double dt = 0.05;
     double t = 0;
     int header_size = 5;
+
+    bool calibrationState = false;
 };
 
 

@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     , motor(new Motor)
     , serial(new QSerialPort(this))
     , stimer(new QTimer)
+    , calibTimer(new QTimer)
 {
     ui->setupUi(this);
 
@@ -30,6 +31,8 @@ MainWindow::MainWindow(QWidget *parent)
             this, SLOT(processData(QByteArray)));
 
     connect(stimer, SIGNAL(timeout()), this, SLOT(targetcallback()));
+
+    connect(this, SIGNAL(calibrationDone()), this, SLOT(calibrationProcessData()));
 
 }
 
@@ -160,6 +163,7 @@ void MainWindow::updatePlotData()
 {
 
     double key = t*dt;
+
     t++;
 
     ui->speedplot->graph(0)->addData(key, (double)motor->m_speed);
@@ -252,6 +256,13 @@ void MainWindow::targetcallback()
     quint8 mode = motor->controlMode;
     float targetValue = ui->applytarget_spinbox->value();
     float roundinput;
+
+    if(calibrationState && calibTimer->isActive())
+    {
+        mode = PWM;
+        targetValue = 50;
+    }
+
 
     switch(mode)
     {
@@ -419,6 +430,11 @@ void MainWindow::processData(QByteArray data_in)
     default:
         break;
     }
+
+    if(calibrationState && !calibTimer->isActive())
+    {
+        emit calibrationDone();
+    }
 }
 
 
@@ -432,6 +448,7 @@ void MainWindow::on_applytarget_button_clicked()
             stimer->start(50);
             ui->applytarget_button->setText("Stop Target");
             ui->consolelog->appendPlainText("Target applied");
+            ui->calibration_button->setDisabled(true);
 
         }
         else if(ui->applytarget_button->text() == "Stop Target")
@@ -439,6 +456,7 @@ void MainWindow::on_applytarget_button_clicked()
             stimer->stop();
             ui->applytarget_button->setText("Apply Target");
             ui->consolelog->appendPlainText("Target stop");
+            ui->calibration_button->setDisabled(false);
         }
     }
     else
@@ -482,8 +500,21 @@ void MainWindow::on_connect_button_clicked()
 
 void MainWindow::on_calibration_button_clicked()
 {
-    ui->consolelog->appendPlainText("encoder calibration Started");
 
+    if(serial->isOpen())
+    {
+        calibrationState = true;
+        stimer->start(50);
+        calibTimer->setSingleShot(true);
+        calibTimer->start(5000);
+
+        ui->applytarget_button->setDisabled(true);
+        ui->consolelog->appendPlainText("encoder calibration Started");
+    }
+    else
+    {
+        showStatusMessage(tr("Serial Port closed"));
+    }
 
 }
 
@@ -518,3 +549,24 @@ void MainWindow::on_apply_button_clicked()
 
 }
 
+void MainWindow::calibrationProcessData()
+{
+    calibrationState = false;
+    stimer->stop();
+    calibTimer->stop();
+
+    if(motor->m_speed >= 0)
+    {
+        motor->encoderDir = 1;
+    }
+    else
+    {
+        motor->encoderDir = -1;
+    }
+
+    updateGUIParamData();
+
+    ui->consolelog->appendPlainText("encoder calibration Done");
+
+    ui->applytarget_button->setDisabled(false);
+}
